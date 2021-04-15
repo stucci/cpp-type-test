@@ -73,7 +73,19 @@ static_assert(std::is_trivial<double>::value == true, "value == true, double is 
 static_assert(std::is_trivial<std::string>::value == false, "value == false, string is not trivial");
 static_assert(std::is_trivial<std::vector<int>>::value == false, "value == false, std::vector<int> is not trivial");
 static_assert(std::is_trivial<std::array<int, 3>>::value == true, "value == false, std::array<int, 3> is trivial");
-static_assert(std::is_trivial<int*>::value == true, "value == false, int* is trivial");
-static_assert(std::is_trivial<int[]>::value == true, "value == false, std::vector<int> is trivial");
+static_assert(std::is_trivial<int*>::value == true, "value == true, int* is trivial");
+static_assert(std::is_trivial<int[]>::value == false, "value == false, int[] is not trivial");
+
+// [true_type - cpprefjp C++日本語リファレンス](https://cpprefjp.github.io/reference/type_traits/true_type.html)
+static_assert(std::true_type::value == true, "value == true");
+static_assert(std::is_same<std::true_type::value_type, bool>::value, "value_type == bool");
+static_assert(std::is_same<std::true_type::type, std::true_type>::value, "type == true_type");
+static_assert(std::true_type() == true, "true_type() == true");
+
+// [false_type - cpprefjp C++日本語リファレンス](https://cpprefjp.github.io/reference/type_traits/false_type.html)
+static_assert(std::false_type::value == false, "value == false");
+static_assert(std::is_same<std::false_type::value_type, bool>::value, "value_type == bool");
+static_assert(std::is_same<std::false_type::type, std::false_type>::value, "type == false_type");
+static_assert(std::false_type() == false, "false_type() == false");
 
 int main(){}
